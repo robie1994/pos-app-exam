@@ -9,7 +9,6 @@ const Transact = () => {
     { id: '3', Name: 'Lemons', Price: 40.00 }]);
 
   const [orderedProductList, setOrderedProductList] = useState([]);
-  const [transactionList, setTransactionList] = useState([]);
   const [applesQty, setApplesQty] = useState(1);
   const [orangesQty, setOrangesQty] = useState(1);
   const [lemonsQty, setLemonsQty] = useState(1);
@@ -66,11 +65,12 @@ const confirmTransaction = () => {
   let items = '';
   orderedProductList.map(product => {
     if(orderedProductList.indexOf(product) === 0) {
-      items = product.Name;
+       items = product.Name
     }
     else {
     items = items + ',' + product.Name;
     }
+    return items;
   })
   var retrievedObject = localStorage.getItem("transactionList");
   var stored = JSON.parse(retrievedObject);
@@ -78,6 +78,7 @@ const confirmTransaction = () => {
   if (stored){
   stored.map(storedata => {
     data.push(storedata)
+    return null;
   })
 }
   data.push({transactionId: transactionId, NetTotal: netTotal, DateToday: dateToday, Products: items})
